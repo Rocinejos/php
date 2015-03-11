@@ -1,2 +1,2 @@
-# java
-Ejemplos y ejercicios de Java
+# PHP
+Ejemplos y ejercicios de PHP
