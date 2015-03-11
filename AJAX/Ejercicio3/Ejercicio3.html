@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<style type="text/css">
+	img{
+		width: 60px;
+		height: 50px;
+	}
+	
+</style>
+<script type="text/javascript">
+var xmlhttp;
+	function accionAJAX(){
+		textoRecibido = xmlhttp.responseText;
+		document.getElementById("lenguaje").innerHTML=textoRecibido;
+	}
+
+	function usarAJAX(){
+		
+		bandera = document.querySelector('input[name="bandera"]').value;
+		
+		xmlhttp	= new XMLHttpRequest();
+		xmlhttp.open("GET", "Ejercicio3.php?bandera="+bandera, true);
+		xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		xmlhttp.send();
+		xmlhttp.onreadystatechange = function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				accionAJAX();
+			}
+		}
+	}
+</script>
+
+<title>Ejercicio 3 de AJAX</title>
+</head>
+<body>
+	<h1>Idiomas</h1>
+	<label for="es"><img src="img/spain.png" /></label><input type="radio" name="bandera" value="es" id="es" onchange="usarAJAX()"/>
+	<label for="uk"><img src="img/england.png" /></label><input type="radio" name="bandera" value="uk" id="uk" onchange="usarAJAX()"/>
+	<label for="fr"><img src="img/france.png" /></label><input type="radio" name="bandera" value="fr" id="fr" onchange="usarAJAX()"/>
+	<br /><br />
+	<div id="lenguaje"></div>
+</body>
+</html>

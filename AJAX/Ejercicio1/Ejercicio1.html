@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+var xmlhttp;
+	function usarAJAX(){
+		// getElementById("valor_id") --> devuelve el valor del ID de una etiqueta
+		nombre = document.getElementById("nombre").value;
+		// Objeto JavaScript que manejará la petición
+		xmlhttp	= new XMLHttpRequest();
+		// Se envía la petición AJAX a dicho fichero con el valor de "nombre"
+		xmlhttp.open("GET", "Ejercicio1.php?nombre="+nombre, true);
+		// Se envía las cabeceras para identificar que es AJAX
+		xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		// Realizamos la petición HTTP al servidor
+		xmlhttp.send();
+		// Cuando se tenga la respuesta del servidor, se maneja los eventos
+		xmlhttp.onreadystatechange = function(){
+			// Comprueba que todo este correcto y llama a la función
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				accionAJAX();
+			}
+		}
+	}
+	// Esta función, da al valor del ID especificado lo que devuelva
+	// el contenido de la respuesta del servidor
+	function accionAJAX(){
+		textoRecibido = xmlhttp.responseText;
+		document.getElementById("saludo").innerHTML=textoRecibido;
+	}
+</script>
+<title>Ejercicio 1 de AJAX</title>
+</head>
+<body>
+	<h1>SALUDADOR</h1>
+	<label for="nombre">Introduce tu nombre: </label><input type="text" id="nombre" name="nombre" size="5"/>
+	<br />
+	<div id="saludo"></div>
+	<br />
+	<input type="button" name="enviar" value="Saludar" onClick="usarAJAX()" />
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<script type="text/javascript">
+var xmlhttp;
+	function accionAJAX(){
+		textoRecibido = xmlhttp.responseText;
+		document.getElementById("provincias").innerHTML=textoRecibido;
+	}
+
+	function usarAJAX(){
+		
+		comunidad = document.getElementById("comunidad").value;
+		
+		xmlhttp	= new XMLHttpRequest();
+		xmlhttp.open("GET", "Ejercicio2.php?comunidad="+comunidad, true);
+		xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		xmlhttp.send();
+		xmlhttp.onreadystatechange = function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				accionAJAX();
+			}
+		}
+	}
+</script>
+
+<title>Ejercicio 2 de AJAX</title>
+</head>
+<body>
+	<h1>Comunidades autónomas</h1>
+	<label for="comunidad">CCAA: </label><select id="comunidad" name="comunidad" onChange="usarAJAX()">
+		<option value="andalucia">Andaluc&iacute;a</option>
+		<option value="aragon">Arag&oacute;n</option>
+		<option value="canarias">Islas Canarias</option>
+		<option value="lamancha">Castilla La Mancha</option>
+		<option value="valencia">Comunidad Valenciana</option>
+	</select>
+	<br /><br />
+	<label for="provincias">Provincias: </label>
+	<div id="provincias"></div>
+	<h2>Escoge una Comunidad Aut&oacute;noma</h2>
+</body>
+</html>
